@@ -83,6 +83,7 @@
             android:textSize="20sp" />
 
         <Button
+            android:id="@+id/signInHomeBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -133,15 +134,16 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/signUpHomeBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
-            android:background="@color/blue"
+            android:background="@drawable/edittext_back_simple"
             android:text="Sign Up"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/gray"
             android:textSize="20sp" />
 
     </LinearLayout>

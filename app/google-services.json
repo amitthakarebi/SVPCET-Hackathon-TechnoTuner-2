@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "958828563178",
+    "firebase_url": "https://digitalcomplaint.firebaseio.com",
+    "project_id": "digitalcomplaint",
+    "storage_bucket": "digitalcomplaint.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958828563178:android:c9f4297b3f6df225c56593",
+        "android_client_info": {
+          "package_name": "com.Technotuner.SVPCET"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958828563178-k2npvtvoiksq84nidmmtjt21ulj9rb2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuYNhyMhEzqNmbiF1fVoU_sNhkwbFgGJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958828563178-k2npvtvoiksq84nidmmtjt21ulj9rb2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

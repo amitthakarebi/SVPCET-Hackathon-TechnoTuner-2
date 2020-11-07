@@ -92,6 +92,18 @@
                 android:textColor="@color/black" />
 
             <EditText
+                android:id="@+id/cityEditTextNC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_back_simple"
+                android:hint="City"
+                android:paddingStart="15dp"
+                android:textColor="@color/black" />
+
+            <EditText
                 android:id="@+id/descriptionEditTextNC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,12 +126,14 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/uploadImgBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
                     android:text="Upload Picture" />
 
                 <TextView
+                    android:id="@+id/uploadTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Not Selected"
@@ -128,6 +142,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/submitComplaintBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

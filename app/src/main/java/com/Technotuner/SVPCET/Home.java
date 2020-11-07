@@ -46,7 +46,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         myComplaintImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Home.this, "My", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Home.this,MyComplaint.class);
+                startActivity(intent);
             }
         });
 

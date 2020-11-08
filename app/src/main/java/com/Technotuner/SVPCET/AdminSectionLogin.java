@@ -2,6 +2,7 @@ package com.Technotuner.SVPCET;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ public class AdminSectionLogin extends AppCompatActivity {
     private EditText adminEmail, adminPassword;
     private Button adminSignInBtn;
     private TextView adminForgetPassword;
+    private ProgressDialog progressDialogSignInAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class AdminSectionLogin extends AppCompatActivity {
         adminSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialogSignInAdmin = new ProgressDialog(AdminSectionLogin.this);
+                progressDialogSignInAdmin.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressDialogSignInAdmin.setTitle("Checking User Info...");
+                progressDialogSignInAdmin.show();
                 if (!TextUtils.isEmpty(adminEmail.getText().toString()) && Patterns.EMAIL_ADDRESS.matcher(adminEmail.getText().toString()).matches())
                 {
                     if (!TextUtils.isEmpty(adminPassword.getText().toString()))
@@ -39,10 +45,12 @@ public class AdminSectionLogin extends AppCompatActivity {
                     }else
                     {
                         adminPassword.setError("Enter Valid Password!");
+                        progressDialogSignInAdmin.dismiss();
                     }
                 }else
                 {
                     adminEmail.setError("Enter Valid Email!");
+                    progressDialogSignInAdmin.dismiss();
                 }
             }
         });
@@ -55,6 +63,7 @@ public class AdminSectionLogin extends AppCompatActivity {
         {
             Intent intent = new Intent(AdminSectionLogin.this,AdminHome.class);
             intent.putExtra("department","Muncipal Council");
+            progressDialogSignInAdmin.dismiss();
             startActivity(intent);
             finish();
 
@@ -62,11 +71,13 @@ public class AdminSectionLogin extends AppCompatActivity {
         {
             Intent intent = new Intent(AdminSectionLogin.this,AdminHome.class);
             intent.putExtra("department","Ministry Of Power");
+            progressDialogSignInAdmin.dismiss();
             startActivity(intent);
             finish();
         }else
         {
             Toast.makeText(this, "Incorrect Details!", Toast.LENGTH_SHORT).show();
+            progressDialogSignInAdmin.dismiss();
         }
 
     }

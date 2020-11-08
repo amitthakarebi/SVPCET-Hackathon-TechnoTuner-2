@@ -3,6 +3,7 @@ package com.Technotuner.SVPCET;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,6 +29,8 @@ public class SignUp extends AppCompatActivity {
     private Button signUpBtn, loginBtn;
 
     private String name_validation = "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$";
+
+    private ProgressDialog progressDialogSignUp;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
@@ -76,6 +79,11 @@ public class SignUp extends AppCompatActivity {
 
     private void checkConditions() {
 
+        progressDialogSignUp = new ProgressDialog(this);
+        progressDialogSignUp.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialogSignUp.setTitle("Registering User...");
+        progressDialogSignUp.show();
+
         if (!TextUtils.isEmpty(editTextName.getText().toString()) && editTextName.getText().toString().matches(name_validation))
         {
             if(!TextUtils.isEmpty(editTextMobile.getText().toString()) && editTextMobile.getText().length() ==10)
@@ -110,10 +118,12 @@ public class SignUp extends AppCompatActivity {
                                                                     Intent intent = new Intent(SignUp.this,OtpVerification.class);
                                                                     intent.putExtra("mobile",editTextMobile.getText().toString());
                                                                     startActivity(intent);
+                                                                    progressDialogSignUp.dismiss();
                                                                     finish();
                                                                 }else
                                                                 {
                                                                     Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    progressDialogSignUp.dismiss();
                                                                 }
                                                             }
                                                         });
@@ -121,28 +131,34 @@ public class SignUp extends AppCompatActivity {
                                             }else
                                             {
                                                 Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                progressDialogSignUp.dismiss();
                                             }
                                         }
                                     });
                         }else
                         {
                             editTextPassword.setError("Password should be at least 8 letters!");
+                            progressDialogSignUp.dismiss();
                         }
                     }else
                     {
                         editTextPassword.setError("Enter Valid Password!");
+                        progressDialogSignUp.dismiss();
                     }
                 }else
                 {
                     editTextEmail.setError("Enter Valid Email!");
+                    progressDialogSignUp.dismiss();
                 }
             }else
             {
                 editTextMobile.setError("Enter Valid Mobile No!");
+                progressDialogSignUp.dismiss();
             }
         }else
         {
             editTextName.setError("Enter Valid Full Name!");
+            progressDialogSignUp.dismiss();
         }
 
     }

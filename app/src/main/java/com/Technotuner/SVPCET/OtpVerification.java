@@ -34,7 +34,6 @@ public class OtpVerification extends AppCompatActivity {
     private Button sendOtpBtn, verifyOtpBtn;
     FirebaseAuth firebaseAuth;
     private TextView otpSentText;
-    private ProgressBar progressBar;
     private String phoneNumber, emailId, password;
     private String otpId;
 
@@ -55,7 +54,6 @@ public class OtpVerification extends AppCompatActivity {
         verifyOtpBtn = findViewById(R.id.verifyOtpBtn);
         firebaseAuth = FirebaseAuth.getInstance();
         otpSentText = findViewById(R.id.sentOtpText);
-        progressBar = findViewById(R.id.otpProgressBar);
         verifyOtpBtn.setClickable(false);
         Intent intent = getIntent();
         String mobileno = intent.getStringExtra("mobile");
@@ -69,6 +67,8 @@ public class OtpVerification extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendOtpBtn.setClickable(false);
+                otpSentText.setVisibility(View.VISIBLE);
+                sendOtpBtn.setBackgroundColor(getResources().getColor(R.color.faint_blue));
                 verifyOtpBtn.setClickable(true);
                 initiateOtp();
             }
@@ -77,6 +77,9 @@ public class OtpVerification extends AppCompatActivity {
         verifyOtpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(OtpVerification.this, "Verifying Otp...", Toast.LENGTH_SHORT).show();
+                verifyOtpBtn.setClickable(false);
+                verifyOtpBtn.setBackgroundColor(getResources().getColor(R.color.faint_blue));
                 if (!TextUtils.isEmpty(editTextOtpOtp.getText())) {
                     if (editTextOtpOtp.getText().length() == 6) {
                         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(otpId, editTextOtpOtp.getText().toString());
@@ -84,9 +87,13 @@ public class OtpVerification extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(OtpVerification.this, "Invalid Otp!", Toast.LENGTH_SHORT).show();
+                        verifyOtpBtn.setClickable(true);
+                        verifyOtpBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                     }
                 } else {
                     Toast.makeText(OtpVerification.this, "Please Enter Otp!", Toast.LENGTH_SHORT).show();
+                    verifyOtpBtn.setClickable(true);
+                    verifyOtpBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                 }
             }
         });
@@ -94,6 +101,7 @@ public class OtpVerification extends AppCompatActivity {
 
 
     private void initiateOtp() {
+        Toast.makeText(this, "Sending Otp...", Toast.LENGTH_SHORT).show();
 
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(firebaseAuth)

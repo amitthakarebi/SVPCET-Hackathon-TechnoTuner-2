@@ -28,7 +28,7 @@ public class EmergencyServices extends AppCompatActivity {
         callPolice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:07232242500"));
                 startActivity(callIntent);
             }
@@ -38,7 +38,7 @@ public class EmergencyServices extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:9373770145"));
                 startActivity(callIntent);
             }
@@ -58,7 +58,7 @@ public class EmergencyServices extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:07232256715"));
                 startActivity(callIntent);
             }
@@ -67,7 +67,7 @@ public class EmergencyServices extends AppCompatActivity {
         callSuicide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:07232256715"));
                 startActivity(callIntent);
             }
@@ -76,7 +76,7 @@ public class EmergencyServices extends AppCompatActivity {
         callAntiPoison.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:07232256715"));
                 startActivity(callIntent);
             }
@@ -85,7 +85,7 @@ public class EmergencyServices extends AppCompatActivity {
         callDaminiPathak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:02532200495"));
                 startActivity(callIntent);
             }

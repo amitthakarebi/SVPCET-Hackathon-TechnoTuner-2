@@ -59,6 +59,8 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
     FirebaseUser currentUser;
     FirebaseDatabase firebaseDatabase;
 
+    private ProgressDialog progressDialogNewComplaint;
+
 
 
     @Override
@@ -136,6 +138,14 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void checkValidation() {
+        progressDialogNewComplaint = new ProgressDialog(NewComplaint.this);
+        progressDialogNewComplaint.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialogNewComplaint.setTitle("Submitting Complaint...");
+        progressDialogNewComplaint.show();
+
+        submitComplaintBtn.setClickable(false);
+        submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.faint_blue));
+
         if (!TextUtils.isEmpty(fullName.getText().toString()))
         {
             if (!TextUtils.isEmpty(mobileNo.getText().toString()) && mobileNo.getText().length() == 10)
@@ -154,30 +164,51 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
                                 }else
                                 {
                                     Toast.makeText(this, "Please Upload Image!", Toast.LENGTH_SHORT).show();
+                                    progressDialogNewComplaint.dismiss();
+                                    submitComplaintBtn.setClickable(true);
+                                    submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                                 }
                             }else
                             {
                                 description.setError("Enter Description!");
+                                progressDialogNewComplaint.dismiss();
+                                submitComplaintBtn.setClickable(true);
+                                submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                             }
                         }else
                         {
                             city.setError("Enter Valid City!");
+                            progressDialogNewComplaint.dismiss();
+                            submitComplaintBtn.setClickable(true);
+                            submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                         }
                     }else
                     {
                         address.setError("Enter Valid Address!");
+                        progressDialogNewComplaint.dismiss();
+                        submitComplaintBtn.setClickable(true);
+                        submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                     }
                 }else
                 {
                     Toast.makeText(this, "Choose Department!", Toast.LENGTH_SHORT).show();
+                    progressDialogNewComplaint.dismiss();
+                    submitComplaintBtn.setClickable(true);
+                    submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                 }
             }else
             {
                 mobileNo.setError("Enter Valid Mobile No!");
+                progressDialogNewComplaint.dismiss();
+                submitComplaintBtn.setClickable(true);
+                submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
             }
         }else
         {
             fullName.setError("Enter Valid Name!");
+            progressDialogNewComplaint.dismiss();
+            submitComplaintBtn.setClickable(true);
+            submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
         }
     }
 
@@ -201,10 +232,14 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful())
                 {
-                    Toast.makeText(NewComplaint.this, "Done", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewComplaint.this, "Complaint Submitted!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }else
                 {
                     Toast.makeText(NewComplaint.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialogNewComplaint.dismiss();
+                    submitComplaintBtn.setClickable(true);
+                    submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                 }
             }
         });
@@ -219,6 +254,9 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
                 }else
                 {
                     Toast.makeText(NewComplaint.this, "UserComplaint not submiited", Toast.LENGTH_SHORT).show();
+                    progressDialogNewComplaint.dismiss();
+                    submitComplaintBtn.setClickable(true);
+                    submitComplaintBtn.setBackgroundColor(getResources().getColor(R.color.blue));
                 }
             }
         });

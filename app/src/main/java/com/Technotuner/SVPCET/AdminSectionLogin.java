@@ -29,6 +29,13 @@ public class AdminSectionLogin extends AppCompatActivity {
         adminPassword = findViewById(R.id.adminPassword);
         adminForgetPassword = findViewById(R.id.adminForgetPassword);
         adminSignInBtn = findViewById(R.id.adminSignInBtn);
+        adminForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminSectionLogin.this,ForgetPassword.class);
+                startActivity(intent);
+            }
+        });
 
         adminSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override

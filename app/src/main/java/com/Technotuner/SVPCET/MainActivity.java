@@ -13,6 +13,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,12 +29,23 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextEmailMain, editTextPasswordMain;
     FirebaseAuth firebaseAuth;
 
+    private TextView resetPasswordTextView;
+
     private ProgressDialog progressDialogSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        resetPasswordTextView = findViewById(R.id.resetPasswordMain);
+        resetPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ForgetPassword.class);
+                startActivity(intent);
+            }
+        });
 
         signUpHomeBtn = findViewById(R.id.signUpHomeBtn);
         signInHomeBtn = findViewById(R.id.signInHomeBtn);

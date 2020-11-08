@@ -128,8 +128,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_share:
                 break;
             case R.id.nav_privacy_policy:
+                Intent intent = new Intent(Home.this,PrivacyPolicy.class);
+                startActivity(intent);
                 break;
             case R.id.nav_aboutus:
+                Intent intent1 = new Intent(Home.this,AboutUs.class);
+                startActivity(intent1);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

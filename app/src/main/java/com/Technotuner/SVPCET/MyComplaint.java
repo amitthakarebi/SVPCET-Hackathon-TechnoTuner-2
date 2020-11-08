@@ -11,6 +11,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.Technotuner.SVPCET.Adapter.RecyclerAdapter;
@@ -53,6 +55,8 @@ public class MyComplaint extends AppCompatActivity {
     FirebaseUser currentUser;
     StorageReference storageReference;
 
+    ImageView toolbarBack;
+
     String myComplaintList[];
     int myComplaintLength;
 
@@ -67,6 +71,14 @@ public class MyComplaint extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        toolbarBack = findViewById(R.id.toolbar_back_my_complaint);
+        toolbarBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         recyclerView = findViewById(R.id.myComplaintRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

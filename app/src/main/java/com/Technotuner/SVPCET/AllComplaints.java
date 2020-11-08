@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.Technotuner.SVPCET.Adapter.AdminRecyclerAdapter;
@@ -33,6 +35,8 @@ public class AllComplaints extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     StorageReference storageReference;
 
+    ImageView backToolbar;
+
     List<AllComplaintRecyclerInfo> allListComplaint;
     RecyclerView allComplaintRecyclerView;
     AllComplaintAdapter allComplaintAdapter;
@@ -44,6 +48,14 @@ public class AllComplaints extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        backToolbar = findViewById(R.id.toolbar_back_all_complaint);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         allComplaintRecyclerView = findViewById(R.id.allComplaintRecyclerView);
         allComplaintRecyclerView.setLayoutManager(new LinearLayoutManager(this));

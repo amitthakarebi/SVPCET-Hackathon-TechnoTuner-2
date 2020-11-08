@@ -11,6 +11,7 @@ import android.widget.ImageView;
 public class EmergencyServices extends AppCompatActivity {
 
     private ImageView callPolice, callAmbulance, callFire, callDomestic, callSuicide, callAntiPoison, callDaminiPathak;
+    private ImageView toolBackEmergency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,14 @@ public class EmergencyServices extends AppCompatActivity {
         callSuicide = findViewById(R.id.callSuicide);
         callAntiPoison = findViewById(R.id.callAntiPoison);
         callDaminiPathak = findViewById(R.id.callDaminiPathak);
+
+        toolBackEmergency = findViewById(R.id.toolbar_back_emergency);
+        toolBackEmergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         callPolice.setOnClickListener(new View.OnClickListener() {
             @Override

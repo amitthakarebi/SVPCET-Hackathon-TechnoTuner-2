@@ -4,7 +4,6 @@
     android:id="@+id/recyclerViewMainLayout"
     android:layout_height="250dp"
     android:padding="5dp"
-    android:background="@drawable/edittext_back_simple"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -70,6 +69,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Description :"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/complaintStatusView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Status :"
             android:textColor="@color/black"
             android:textSize="14sp" />
 

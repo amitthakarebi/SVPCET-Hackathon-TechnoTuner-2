@@ -42,18 +42,15 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
 
     private ImageView toolbarBackBtn;
     private Spinner spinner;
-    private String[] departmentList = {"Muncipal Council","Ministry of Road Transport & Highways, Government of India",
-            "Department of Water Resources, River Development & Ganga Rejuvenation",
-             "Ministry Of Power","Ministry of Agriculture and Farmers' Welfare",
-            "Ministry of Food Processing Industries","Ministry of Health and Family Welfare",
-            "Ministry of Health and Family Welfare","Ministry of Labour and Employment",
-            "Ministry of Law and Justice","Ministry of Railways"};
+    private String[] departmentList = {"Muncipal Council","Ministry of Road Transport & Highways",
+            "Department of Water Resources","Ministry Of Power"};
 
     private Button submitComplaintBtn,uploadImgBtn;
     private EditText fullName, mobileNo, address, description,city;
     private String spinnerOption;
     private TextView uploadTextView;
     private ProgressDialog progressDialogImg;
+    private String imageUploadUri;
 
     //database
     FirebaseAuth firebaseAuth;
@@ -189,6 +186,7 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
         int random_int = (int)(Math.random() * (999999999 - 1000000 + 1) + 1000000);
 
         Map<String,Object> complaintData = new HashMap<>();
+        complaintData.put("Image",imageUploadUri);
         complaintData.put("Full_Name",fullName.getText().toString());
         complaintData.put("Mobile_No",mobileNo.getText().toString());
         complaintData.put("Department",spinnerOption);
@@ -207,6 +205,20 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
                 }else
                 {
                     Toast.makeText(NewComplaint.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        DatabaseReference databaseReference1 = firebaseDatabase.getReference("MyComplaints").child(firebaseAuth.getCurrentUser().getUid()).child(spinnerOption);
+        databaseReference1.setValue(spinnerOption).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful())
+                {
+                    Toast.makeText(NewComplaint.this, "UserComplaint Submitted", Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    Toast.makeText(NewComplaint.this, "UserComplaint not submiited", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -241,6 +253,7 @@ public class NewComplaint extends AppCompatActivity implements AdapterView.OnIte
                     @Override
                     public void onSuccess(Uri uri) {
                         //when image get uploaded then toast will occurs
+                        imageUploadUri = uri.toString();
                         Toast.makeText(NewComplaint.this, "Image Uploaded!", Toast.LENGTH_LONG).show();
                     }
                 });

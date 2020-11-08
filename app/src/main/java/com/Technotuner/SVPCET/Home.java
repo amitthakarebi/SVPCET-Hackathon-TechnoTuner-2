@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +16,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.Technotuner.SVPCET.Model.RecyclerInfo;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -54,14 +70,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         allComplaintImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Home.this, "All", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Home.this,AllComplaints.class);
+                startActivity(intent);
             }
         });
 
         emergencyServicesImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Home.this, "Emergency", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Home.this,EmergencyServices.class);
+                startActivity(intent);
             }
         });
 
@@ -72,6 +90,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         myComplaintImg = findViewById(R.id.myComplaintImg);
         allComplaintImg = findViewById(R.id.allComplaintImg);
         emergencyServicesImg  = findViewById(R.id.emergencyServicesImg);
+
 
     }
 

@@ -1,10 +1,10 @@
 package com.Technotuner.SVPCET.Model;
 
-public class RecyclerInfo {
+public class AllComplaintRecyclerInfo {
 
     String complaintFullName, complaintMobileNo, complaintLocation, complaintDescription, complaintImage, complaintCity,complaintStatus;
 
-    public RecyclerInfo(String complaintFullName, String complaintMobileNo, String complaintLocation, String complaintDescription, String complaintImage, String complaintCity, String complaintStatus) {
+    public AllComplaintRecyclerInfo(String complaintFullName, String complaintMobileNo, String complaintLocation, String complaintDescription, String complaintImage, String complaintCity, String complaintStatus) {
         this.complaintFullName = complaintFullName;
         this.complaintMobileNo = complaintMobileNo;
         this.complaintLocation = complaintLocation;
@@ -12,17 +12,6 @@ public class RecyclerInfo {
         this.complaintImage = complaintImage;
         this.complaintCity = complaintCity;
         this.complaintStatus = complaintStatus;
-    }
-
-    public RecyclerInfo() {
-    }
-
-    public String getComplaintCity() {
-        return complaintCity;
-    }
-
-    public void setComplaintCity(String complaintCity) {
-        this.complaintCity = complaintCity;
     }
 
     public String getComplaintFullName() {
@@ -63,6 +52,14 @@ public class RecyclerInfo {
 
     public void setComplaintImage(String complaintImage) {
         this.complaintImage = complaintImage;
+    }
+
+    public String getComplaintCity() {
+        return complaintCity;
+    }
+
+    public void setComplaintCity(String complaintCity) {
+        this.complaintCity = complaintCity;
     }
 
     public String getComplaintStatus() {

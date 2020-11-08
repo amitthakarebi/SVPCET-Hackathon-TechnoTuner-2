@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button signUpHomeBtn;
     private Button signInHomeBtn;
+    private Button adminSectionBtn;
     private EditText editTextEmailMain, editTextPasswordMain;
     FirebaseAuth firebaseAuth;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         signUpHomeBtn = findViewById(R.id.signUpHomeBtn);
         signInHomeBtn = findViewById(R.id.signInHomeBtn);
+        adminSectionBtn = findViewById(R.id.adminSectionBtn);
         editTextEmailMain = findViewById(R.id.editTextEmailMain);
         editTextPasswordMain = findViewById(R.id.editTextPasswordMain);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -62,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,SignUp.class);
+                startActivity(intent);
+            }
+        });
+
+        adminSectionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AdminSectionLogin.class);
                 startActivity(intent);
             }
         });

@@ -94,72 +94,49 @@ public class MyComplaint extends AppCompatActivity {
 
         // here do the firebase loop and get data into adapter and show as the complaint
 
-        DatabaseReference databaseReference =firebaseDatabase.getReference("MyComplaints").child(firebaseAuth.getCurrentUser().getUid());
+        DatabaseReference databaseReference =firebaseDatabase.getReference("Complaints");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren())
                 {
-                    //Toast.makeText(MyComplaint.this, Long.toString(snapshot.getChildrenCount()), Toast.LENGTH_SHORT).show();
-                    myComplaintList = new String[((int) snapshot.getChildrenCount())];
-                    int i=0;
-                    for (DataSnapshot snap : snapshot.getChildren())
+                    for (DataSnapshot snapshot1 : snapshot.getChildren())
                     {
-                        myComplaintList[i]=snap.getKey();
-                        i++;
-                    }
-                    Toast.makeText(MyComplaint.this, Arrays.toString(myComplaintList), Toast.LENGTH_SHORT).show();
-                    myComplaintLength = myComplaintList.length;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        DatabaseReference databaseReference1 = firebaseDatabase.getReference("Complaints");
-        databaseReference1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int i=0;i<myComplaintLength;i++)
-                {
-                    if (snapshot.child(myComplaintList[i]).hasChild(firebaseAuth.getCurrentUser().getUid()))
-                    {
-                        for (DataSnapshot snap : snapshot.child(myComplaintList[i]).child(firebaseAuth.getCurrentUser().getUid()).getChildren())
+                        if (snapshot1.hasChild(firebaseAuth.getCurrentUser().getUid()))
                         {
-                            String key = snap.getKey();
-                            if (key.equals("Full_Name"))
+                            for (DataSnapshot snapshot2 : snapshot1.child(firebaseAuth.getCurrentUser().getUid()).getChildren())
                             {
-                                fullName = String.valueOf(snap.getValue());
-                            }else if (key.equals("Address"))
-                            {
-                                location = String.valueOf(snap.getValue());
-                            }else if (key.equals("Mobile_No"))
-                            {
-                                mobileNo = String.valueOf(snap.getValue());
-                            }else if (key.equals("City"))
-                            {
-                                city = String.valueOf(snap.getValue());
-                            }else if (key.equals("Description"))
-                            {
-                                 description = String.valueOf(snap.getValue());
-                            }else if (key.equals("Image"))
-                            {
-                                image = String.valueOf(snap.getValue());
-                            }else if(key.equals("Status"))
-                            {
-                                status = String.valueOf(snap.getValue());
+                                String key = snapshot2.getKey();
+                                if (key.equals("Full_Name"))
+                                {
+                                    fullName = String.valueOf(snapshot2.getValue());
+                                }else if (key.equals("Address"))
+                                {
+                                    location = String.valueOf(snapshot2.getValue());
+                                }else if (key.equals("Mobile_No"))
+                                {
+                                    mobileNo = String.valueOf(snapshot2.getValue());
+                                }else if (key.equals("City"))
+                                {
+                                    city = String.valueOf(snapshot2.getValue());
+                                }else if (key.equals("Description"))
+                                {
+                                    description = String.valueOf(snapshot2.getValue());
+                                }else if (key.equals("Image"))
+                                {
+                                    image = String.valueOf(snapshot2.getValue());
+                                }else if(key.equals("Status"))
+                                {
+                                    status = String.valueOf(snapshot2.getValue());
+                                }
                             }
+                            RecyclerInfo recyclerInfo = new RecyclerInfo(fullName,mobileNo,location,description,image,city,status);
+                            listComplaints.add(recyclerInfo);
                         }
-
-                        RecyclerInfo recyclerInfo = new RecyclerInfo(fullName,mobileNo,location,description,image,city,status);
-                        listComplaints.add(recyclerInfo);
                     }
+                    recyclerAdapter= new RecyclerAdapter(getApplicationContext(),listComplaints);
+                    recyclerView.setAdapter(recyclerAdapter);
                 }
-                recyclerAdapter= new RecyclerAdapter(getApplicationContext(),listComplaints);
-                recyclerView.setAdapter(recyclerAdapter);
             }
 
             @Override
@@ -167,7 +144,6 @@ public class MyComplaint extends AppCompatActivity {
 
             }
         });
-
 
     }
 }

@@ -7,7 +7,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -38,6 +40,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
+
+    FirebaseAuth firebaseAuth;
 
     private ImageView newComplaintImg, myComplaintImg, allComplaintImg, emergencyServicesImg;
 
@@ -91,6 +95,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         allComplaintImg = findViewById(R.id.allComplaintImg);
         emergencyServicesImg  = findViewById(R.id.emergencyServicesImg);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
     }
 
@@ -139,4 +145,76 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
+
+    @Override
+    public void onBackPressed() {
+        // Create the object of
+        // AlertDialog Builder class
+        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        // Set the message show for the Alert time
+        builder.setMessage("Click Yes to logout!");
+        builder.setIcon(R.drawable.digital_complaint_logo);
+
+        // Set Alert Title
+        builder.setTitle("Do you want to Logout?");
+
+        // Set Cancelable false
+        // for when the user clicks on the outside
+        // the Dialog Box then it will remain show
+        builder.setCancelable(false);
+
+        // Set the positive button with yes name
+        // OnClickListener method is use of
+        // DialogInterface interface.
+
+        builder
+                .setPositiveButton(
+                        "Yes",
+                        new DialogInterface
+                                .OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which)
+                            {
+
+                                // When the user click yes button
+                                //finishAffinity();
+                                //finish();
+                                //System.exit(0);
+                                firebaseAuth.signOut();
+                                Intent intent = new Intent(Home.this,MainActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        });
+
+        // Set the Negative button with No name
+        // OnClickListener method is use
+        // of DialogInterface interface.
+        builder
+                .setNegativeButton(
+                        "No",
+                        new DialogInterface
+                                .OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which)
+                            {
+
+                                // If user click no
+                                // then dialog box is canceled.
+                                dialog.cancel();
+                            }
+                        });
+
+        // Create the Alert dialog
+        AlertDialog alertDialog = builder.create();
+
+        // Show the Alert Dialog box
+        alertDialog.show();
+    }
+
 }
